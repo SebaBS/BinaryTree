@@ -19,10 +19,19 @@ $ vagrant up
 
 Note: The installation may take several minutes for the first time due to the creation of the virtual machine and the configuration of the required components.
 
-## Getting into vagrant
+## Initialize db
 
+To build database:
 ```sh
 $ vagrant ssh
+$ mysql -u root -p MYSQL_PASSWORD_FROM_BOOSTRAP
+$ create database binarytree;
+```
+To fill it with schema:
+```sh
+$ vagrant ssh
+$ cd /var/www/html
+$ php vendor/bin/doctrine o:s:c
 ```
 
 ## Tests

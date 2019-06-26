@@ -22,7 +22,6 @@ sudo cp ${PROJECT_PATH}/phpunit.xml.dist ${PROJECT_PATH}/phpunit.xml
 sudo apt-get install -y php-xdebug
 
 # install mysql and give password to installer
-echo "create database `binarytree`" | mysql -u root -p 98ubfhru4jgu89dS
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_PASSWORD"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD"
 sudo apt-get install -y mysql-server php-mysql

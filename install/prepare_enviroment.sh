@@ -2,7 +2,7 @@
 
 echo "This installation is only for Ubuntu Linux"
 
-VERSION="1.9.2"
+VERSION="2.2.5"
 
 sudo apt-get install virtualbox -y
 sudo apt-get install virtualbox-dkms -y

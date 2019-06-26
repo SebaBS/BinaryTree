@@ -22,6 +22,7 @@ sudo cp ${PROJECT_PATH}/phpunit.xml.dist ${PROJECT_PATH}/phpunit.xml
 sudo apt-get install -y php-xdebug
 
 # install mysql and give password to installer
+echo "create database `binarytree`" | mysql -u root -p 98ubfhru4jgu89dS
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_PASSWORD"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD"
 sudo apt-get install -y mysql-server php-mysql
@@ -62,9 +63,9 @@ curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 # install yaml
-sudo apt-get install -y php7.3-dev libyaml-dev
+sudo apt-get install -y php7.0-dev libyaml-dev
+
 # ssh
-sudo cp ${PROJECT_PATH}/install/.ssh/config ~/.ssh/config
 sudo cp ${PROJECT_PATH}/install/.ssh/id_rsa ~/.ssh/id_rsa
 sudo cp ${PROJECT_PATH}/install/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 
@@ -73,10 +74,10 @@ cd ${PROJECT_PATH}
 composer install
 
 cd ${PROJECT_PATH}
-php bin/console doctrine:database:create
-php bin/console doctrine:schema:update --force
-php bin/console doctrine:database:create --env=test
-php bin/console doctrine:schema:update --force --env=test
+# php bin/console doctrine:database:create
+# php bin/console doctrine:schema:update --force
+# php bin/console doctrine:database:create --env=test
+# php bin/console doctrine:schema:update --force --env=test
 
 
 ################### PART ONLY ON VAGRANT ###################

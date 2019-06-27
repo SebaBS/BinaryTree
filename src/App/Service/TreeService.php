@@ -76,7 +76,11 @@ class TreeService extends AbstractService
             throw new EmptyTreeServiceException();
         }
 
-        $middleIndex = ceil(count($content) / 2) - 1;
+        if (count($content) % 2 == 0) {
+            $middleIndex = ceil(count($content) / 2);
+        } else {
+            $middleIndex = ceil(count($content) / 2) - 1;
+        }
         $middle = $content[$middleIndex];
 
         $leftPart = array_slice($content, 0, $middleIndex);

@@ -25,6 +25,68 @@ final class TreeServiceTest extends TestCase
         $treeService->buildBinaryTree([], UserService::class, 'compareUserDTOs');
     }
 
+    public function testEvenBinaryTreeResult(): void
+    {
+        $treeService = new TreeService(new NodeService());
+
+        $users = [
+            new UserDTO(1, 'test1'),
+            new UserDTO(2, 'test2'),
+            new UserDTO(3, 'test3'),
+            new UserDTO(4, 'test4'),
+            new UserDTO(5, 'test5'),
+            new UserDTO(6, 'test6')
+        ];
+
+        $result = $treeService->buildBinaryTree($users, UserService::class, 'compareUserDTOs');
+
+        $this->assertSame(4, $result->getId());
+        $this->assertSame(2, $result->getLeftChild()->getId());
+        $this->assertSame(3, $result->getLeftChild()->getRightChild()->getId());
+        $this->assertSame(1, $result->getLeftChild()->getLeftChild()->getId());
+        $this->assertSame(6, $result->getRightChild()->getId());
+        $this->assertSame(5, $result->getRightChild()->getLeftChild()->getId());
+        $this->assertSame(null, $result->getRightChild()->getRightChild());
+    }
+
+    public function testOddBinaryTreeResult(): void
+    {
+        $treeService = new TreeService(new NodeService());
+
+        $users = [
+            new UserDTO(1, 'test1'),
+            new UserDTO(2, 'test2'),
+            new UserDTO(3, 'test3'),
+            new UserDTO(4, 'test4'),
+            new UserDTO(5, 'test5')
+        ];
+
+        $result = $treeService->buildBinaryTree($users, UserService::class, 'compareUserDTOs');
+
+        $this->assertSame(3, $result->getId());
+        $this->assertSame(2, $result->getLeftChild()->getId());
+        $this->assertSame(null, $result->getLeftChild()->getRightChild());
+        $this->assertSame(1, $result->getLeftChild()->getLeftChild()->getId());
+        $this->assertSame(5, $result->getRightChild()->getId());
+        $this->assertSame(4, $result->getRightChild()->getLeftChild()->getId());
+        $this->assertSame(null, $result->getRightChild()->getRightChild());
+    }
+
+    public function testSingleNodeBinaryTreeResult(): void
+    {
+        $treeService = new TreeService(new NodeService());
+
+        $users = [
+            new UserDTO(1, 'test1')
+        ];
+
+        $result = $treeService->buildBinaryTree($users, UserService::class, 'compareUserDTOs');
+
+        $this->assertSame(1, $result->getId());
+        $this->assertSame(null, $result->getLeftChild());
+        $this->assertSame(null, $result->getRightChild());
+    }
+
     private function getMockNodeService()
     {
         $nodeService = Mockery::mock(NodeService::class)

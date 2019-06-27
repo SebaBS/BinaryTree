@@ -6,7 +6,9 @@ namespace App\Service;
 
 use App\DTO\UserDTO;
 use App\Entity\User;
+use App\Exception\Service\UserNotFoundServiceException;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
 
 class UserService extends AbstractService
 {
@@ -14,6 +16,11 @@ class UserService extends AbstractService
      * @var UserRepository
      */
     protected $userRepository;
+
+    /**
+     * @var EntityManager
+     */
+    protected $em;
 
     /**
      * @param UserDTO $user1
@@ -30,12 +37,41 @@ class UserService extends AbstractService
 
     /**
      * UserService constructor.
+     * @param EntityManager $em
      * @param UserRepository $userRepository
      */
-    public function __construct(UserRepository $userRepository)
+    public function __construct(EntityManager $em, UserRepository $userRepository)
     {
+        $this->em = $em;
         $this->userRepository = $userRepository;
         parent::__construct();
+    }
+
+    /**
+     * @param string $username
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function addNewUser(string $username): void
+    {
+        $user = new User($username);
+        $this->em->persist($user);
+        $this->em->flush();
+    }
+
+    /**
+     * @param int $userId
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws UserNotFoundServiceException
+     */
+    public function removeUser(int $userId): void
+    {
+        $user = $this->userRepository->find($userId);
+        if (!$user instanceof User) {
+            throw new UserNotFoundServiceException('User with id: '. $userId . ' was not found');
+        }
+
+        $this->em->remove($user);
+        $this->em->flush();
     }
 
     /**

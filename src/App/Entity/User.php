@@ -19,6 +19,15 @@ class User extends AbstractEntity
     protected $username;
 
     /**
+     * User constructor.
+     * @param string $username
+     */
+    public function __construct(string $username)
+    {
+        $this->setUsername($username);
+    }
+
+    /**
      * @return string
      */
     public function getUsername(): string

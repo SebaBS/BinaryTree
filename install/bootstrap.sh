@@ -8,9 +8,16 @@ PROJECT_PATH='/var/www/html'
 sudo apt-get update
 sudo apt-get upgrade -y
 
-# install apache 2.5 and php 7.0
+# install apache 2.5 and php 7.2
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository -y ppa:ondrej/php
+sudo apt-get update
 sudo apt-get install -y apache2
-sudo apt-get install -y php libapache2-mod-php php-mcrypt php-mysql php-intl python-software-properties php-xml php-zip php-bcmath php-curl
+sudo apt-get install -y php7.2 libapache2-mod-php php7.2-mcrypt php7.2-mbstring php7.2-mysql php7.2-intl python-software-properties php7.2-xml php7.2-zip php7.2-bcmath php7.2-curl
+
+sudo update-alternatives --set php /usr/bin/php7.2
+sudo update-alternatives --set phar /usr/bin/phar7.2
+sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.2
 
 # phpunit
 wget https://phar.phpunit.de/phpunit-8.2.3.phar
@@ -24,7 +31,7 @@ sudo apt-get install -y php-xdebug
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_PASSWORD"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_PASSWORD"
-sudo apt-get install -y mysql-server php-mysql
+sudo apt-get install -y mysql-server php7.2-mysql
 
 # install phpmyadmin and give password(s) to installer
 # for simplicity I'm using the same password for mysql and phpmyadmin
@@ -72,11 +79,9 @@ sudo cp ${PROJECT_PATH}/install/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cd ${PROJECT_PATH}
 composer install
 
+# init db
 cd ${PROJECT_PATH}
-# php bin/console doctrine:database:create
-# php bin/console doctrine:schema:update --force
-# php bin/console doctrine:database:create --env=test
-# php bin/console doctrine:schema:update --force --env=test
+# php vendor/bin/doctrine o:s:c
 
 
 ################### PART ONLY ON VAGRANT ###################

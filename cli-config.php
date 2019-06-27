@@ -1,11 +1,12 @@
 <?php
 
+use DI\Bridge\Slim\App;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 
-/** @var \Slim\Container $container */
-$container = require_once 'bootstrap/app.php';
+/** @var App $app */
+$app = require_once 'bootstrap/app.php';
 
-$entityManager = $container->get(EntityManager::class);
+$entityManager = $app->getContainer()->get(EntityManager::class);
 
-return ConsoleRunner::createHelperSet($entityManager);
+$helper = ConsoleRunner::createHelperSet($entityManager);

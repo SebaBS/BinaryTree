@@ -13,6 +13,8 @@ try {
     $app->run();
 } catch (\Throwable $t) {
     // TODO logger
+    var_dump($t->getMessage());
+    var_dump($t->getTraceAsString());
     echo json_encode([
         'errors' => [
             ['message' => 'critical error occured', 'code' => $t->getCode()]

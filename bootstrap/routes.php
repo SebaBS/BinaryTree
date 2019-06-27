@@ -1,4 +1,9 @@
 <?php
 
 /* @var $app \Slim\App */
-$app->get('/', \App\Controller\TreeController::class);
+
+use App\Controller\TreeController;
+
+$app->get('/', TreeController::class . ':getAll');
+$app->post('/', TreeController::class . ':addUser');
+$app->get('/del', TreeController::class . ':removeUser');

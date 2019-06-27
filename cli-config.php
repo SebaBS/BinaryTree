@@ -4,7 +4,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Console\ConsoleRunner;
 
 /** @var \Slim\Container $container */
-$container = require_once 'app/bootstrap.php';
+$container = require_once 'bootstrap/app.php';
 
 $entityManager = $container->get(EntityManager::class);
 

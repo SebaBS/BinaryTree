@@ -1,18 +1,21 @@
 <?php
 
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+declare(strict_types=1);
 
-require '../vendor/autoload.php';
-require_once '../app/bootstrap.php';
+chdir(__DIR__ . "/../");
 
-$app = new \Slim\App;
-$app->get('/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name 2");
+require './vendor/autoload.php';
 
-    return $response;
-});
+try {
+    $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-$app->run();
-
+    require_once __DIR__ . '/../bootstrap/routes.php';
+    $app->run();
+} catch (\Throwable $t) {
+    // TODO logger
+    echo json_encode([
+        'errors' => [
+            ['message' => 'critical error occured', 'code' => $t->getCode()]
+        ]
+    ]);
+}

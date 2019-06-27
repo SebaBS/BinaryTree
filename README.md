@@ -2,7 +2,7 @@
 
 ## Description
 
-Application to present users from database using BinaryTree structure.  
+Application to "show" users from database using BinaryTree structure.  
 
 ## Installation
 

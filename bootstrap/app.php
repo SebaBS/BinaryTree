@@ -65,7 +65,7 @@ $app = new class() extends \Slim\App {
         });
 
         $container->set('view', function ($container) {
-            $view = new \Slim\Views\Twig(__DIR__ . '/../templates', [
+            $view = new \Slim\Views\Twig(__DIR__ . '/../template', [
                 'cache' => __DIR__ . '/var/cache'
             ]);
 

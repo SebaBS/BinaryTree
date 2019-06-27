@@ -2,11 +2,17 @@
 
 ## Description
 
-TODO
+Application to present users from database using BinaryTree structure.  
 
 ## Installation
 
-The system is installed automatically. The necessary components are automatically installed as well.
+Note: Installation process tested only on Ubuntu (16.04/18.04)
+
+```sh
+git clone https://github.com/SebaBS/BinaryTree.git .
+```
+
+The system (vagrant) is installed automatically. The necessary components are automatically installed as well.
 In order for the installation to start, enter the following commands in the project console window.
 
 After the installation is complete, the virtual machine will be available at 192.168.100.104
@@ -24,7 +30,7 @@ Note: The installation may take several minutes for the first time due to the cr
 To build database:
 ```sh
 $ vagrant ssh
-$ mysql -u root -p MYSQL_PASSWORD_FROM_BOOSTRAP
+$ mysql -u root -p 98ubfhru4jgu89dS
 $ create database binarytree;
 ```
 To fill it with schema:
@@ -35,8 +41,9 @@ $ php vendor/bin/doctrine o:s:c
 ```
 
 ## Tests
-To run tests, execute the following line of code in the project console window inside vagrant.
+To run tests, execute the following line of code in the project console window of project root.
 
 ```sh
+$ vagrant ssh
 $ phpunit
 ```

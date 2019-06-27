@@ -1,0 +1,21 @@
+<div style="border: 1px solid #999; padding: 5px;">
+    <h3>Users</h3>
+    <ul>
+        {% for user in users %}
+        <li>
+            {{ user.username|e }} - <a href="/del?id={{user.id}}">remove</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div>
+        <form method="post" action="/">
+            Username: <input name="username" autofocus/> <input type="submit" value="Add user">
+        </form>
+    </div>
+</div>
+<br>
+<div style="border: 1px solid #999; padding: 5px;">
+    <h3>Json BinaryTree</h3>
+    <pre>{{ rootNode|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+</div>

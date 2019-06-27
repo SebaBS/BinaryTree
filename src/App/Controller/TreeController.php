@@ -57,7 +57,7 @@ class TreeController extends AbstractController
             $result = [];
         }
 
-        return $this->view->render($response, 'index.html', [
+        return $this->view->render($response, 'main.html', [
             'rootNode' => $result,
             'users' => $users
         ]);

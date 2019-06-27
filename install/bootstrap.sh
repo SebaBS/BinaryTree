@@ -15,10 +15,6 @@ sudo apt-get update
 sudo apt-get install -y apache2
 sudo apt-get install -y php7.2 libapache2-mod-php php7.2-mcrypt php7.2-mbstring php7.2-mysql php7.2-intl python-software-properties php7.2-xml php7.2-zip php7.2-bcmath php7.2-curl
 
-sudo update-alternatives --set php /usr/bin/php7.2
-sudo update-alternatives --set phar /usr/bin/phar7.2
-sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.2
-
 # phpunit
 wget https://phar.phpunit.de/phpunit-8.2.3.phar
 sudo chmod +x phpunit-8.2.3.phar
@@ -79,14 +75,17 @@ sudo cp ${PROJECT_PATH}/install/.ssh/id_rsa.pub ~/.ssh/id_rsa.pub
 cd ${PROJECT_PATH}
 composer install
 
-# init db
-cd ${PROJECT_PATH}
-# php vendor/bin/doctrine o:s:c
-
+sudo apt-get install -y php7.2
+sudo update-alternatives --set php /usr/bin/php7.2
+sudo update-alternatives --set phar /usr/bin/phar7.2
+sudo update-alternatives --set phar.phar /usr/bin/phar.phar7.2
+sudo apt-get install -y php7.2-xml
 
 ################### PART ONLY ON VAGRANT ###################
 
 # Apache2 envvars change
 sudo cp ${PROJECT_PATH}/install/envvars /etc/apache2/envvars
+sudo a2dismod php7.3
+sudo a2enmod php7.2
 sudo service apache2 restart
 sudo chown ubuntu:ubuntu /var/lock/apache2

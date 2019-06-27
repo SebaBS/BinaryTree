@@ -33,7 +33,7 @@ To build database:
 ```sh
 $ vagrant ssh
 $ mysql -u root -p
-$ 98ubfhru4jgu89dS
+98ubfhru4jgu89dS
 $ create database binarytree;
 ```
 To fill it with schema:
@@ -52,5 +52,6 @@ To run tests, execute the following line of code in the project console window o
 
 ```sh
 $ vagrant ssh
+$ cd /var/www/html
 $ phpunit
 ```
